@@ -13,7 +13,6 @@ from sklearn.naive_bayes import GaussianNB
 
 
 #data preprocessing
-print("test change")
 def preprocessing(df):
     """
     This function takes df along with the column name as an input and provided
