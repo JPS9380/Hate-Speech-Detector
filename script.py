@@ -9,8 +9,10 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score
-from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
 
+
+cv = CountVectorizer()
 
 #data preprocessing
 def preprocessing(df):
@@ -31,13 +33,13 @@ def preprocessing(df):
 
 
 #implementing the countvectorizer
-def vectorizer(corpus, n, df):
+def vectorizer(corpus, df):
     """
     This function takes three inputs and provided the final x and y values after applying the 
     vectorizer.
     df takes the dataframe along with the specified column name.
     """
-    cv = CountVectorizer(max_features=n)
+    global cv
     x = cv.fit_transform(corpus).toarray()
     y = df.values
     return x, y
@@ -60,3 +62,21 @@ def evaluation(y_test, y_pred):
     accuracy = accuracy_score(y_test, y_pred)
     result = f"The accuracy score for the actual and predicted values is {accuracy} \nand the confusion matrix is {cm}"
     return result
+
+#preprocessing single input
+def clean_input(input):
+    """
+    This function takes a single output 
+    and preprocesses it to be suitable for prediction.
+    """
+    corpus = []
+    review = re.sub('[^a-zA-Z]', ' ', input)
+    review = review.lower()
+    review = review.split()
+    ps = PorterStemmer()
+    review = [ps.stem(word) for word in review if word not in set(stopwords.words('english'))]
+    review = ' '.join(review)
+    corpus.append(review)
+    x = cv.transform(corpus).toarray()
+    return x
+
