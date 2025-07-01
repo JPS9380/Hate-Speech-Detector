@@ -20,7 +20,7 @@ def preprocessing(df):
     """
     corpus = []
     for i in range(0, len(df)):
-        review = re.sub('[^a-zA-Z]', ' ', df["column_name"][i])
+        review = re.sub('[^a-zA-Z]', ' ', df[i])
         review = review.lower()
         review = review.split()
         ps = PorterStemmer()
