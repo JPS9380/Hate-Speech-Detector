@@ -54,20 +54,6 @@ def split(x, y):
     return x_train, x_test, y_train, y_test
 
 
-
-
-#training the model on the training set
-def training(x_train, y_train):
-    model = GaussianNB()
-    model.fit(x_train, y_train)
-
-
-#predicting the test set results (probabilities)
-def prediction(model, x_test):
-    y_pred = model.predict(x_test)
-    return y_pred
-
-
 #evaluating the model's performance
 def evaluation(y_test, y_pred):
     cm = confusion_matrix(y_test, y_pred)
