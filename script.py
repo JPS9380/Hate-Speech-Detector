@@ -58,5 +58,5 @@ def split(x, y):
 def evaluation(y_test, y_pred):
     cm = confusion_matrix(y_test, y_pred)
     accuracy = accuracy_score(y_test, y_pred)
-    return f"The accuracy score for the actual and predicted values is {accuracy} \nand the confusion matrix is {cm}"
-
+    result = f"The accuracy score for the actual and predicted values is {accuracy} \nand the confusion matrix is {cm}"
+    return result
