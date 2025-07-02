@@ -1,6 +1,8 @@
 # Hate Speech Detection and Quantification
 
-![a model predicting the probability that a sentence contains hate speech](readme_image/hate_speech_image.png)
+<p align="center">
+  <img src="readme_image/hate_speech_image.png" alt="a model predicting the probability that a sentence contains hate speech" width="200" height="300"/>
+</p>
 
 This project provides a machine learning-based solution to detect and quantify hate speech in textual data using Natural Language Processing (NLP) techniques and a Random Forest classification model.
 
