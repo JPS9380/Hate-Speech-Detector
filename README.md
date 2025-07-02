@@ -61,7 +61,7 @@ jupyter notebook
 ```
 3. Open "notebook.ipynb" and run all cells to train the model and test predictions.
 
-# Note: 
+### Note: 
 - Make sure to download stopwords from the nltk module for the english language.
 - In the script.py file, make sure to replace the 'text_column' and 'label_column' with actual column names from your csv.
 - While reading the probability predictions for a single input be known that the value at zero index is the probability that the given input belongs to the first group(non-hate) and the value at the first index is the probability that it belongs to the second group(hate).
