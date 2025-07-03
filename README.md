@@ -63,9 +63,10 @@ jupyter notebook
 3. Open "notebook.ipynb", create a new cell at the end and run the following snippet,
 ```bash
 from script import *
+from script import cv
 import joblib
 model = joblib.load('Model/model.joblib')
-token_izer_ = joblib.load('Model/tokenizer.joblib')
+cv = joblib.load('Model/vectorizer.joblib')
 inp = clean_input("_") #Enter your sentence in place of the underscore.
 
 model.predict(inp)
