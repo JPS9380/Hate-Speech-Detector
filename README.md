@@ -26,6 +26,7 @@ The primary goal of this project is to:
 
 - The script.py file contains all the functions that have been used to preprocess the data for further use.
 - The notebook.ipynb file has the entire functioning of the project starting from importing the dataset, calling functions to preprocess, then training the model on the cleaned data; in the end, predicting for single inputs.
+- The `Model` folder contains the saved model and the vectorizer to be used for future predictions.
 - The Datasets folder contains all the datasets included in the model, since the file size is large, LFS tracking has been enabled.
 - The requirements.txt file contains all the modules that are needed to make use of the repository.
 

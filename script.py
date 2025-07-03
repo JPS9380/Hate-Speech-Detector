@@ -12,7 +12,6 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 
 
-
 #data preprocessing
 cv = CountVectorizer()
 ps = PorterStemmer()
