@@ -63,7 +63,7 @@ jupyter notebook
 3. Open "notebook.ipynb", create a new cell at the end and run the following snippet,
 ```bash
 from script import *
-from script import cv
+from script import tfv
 import joblib
 model = joblib.load('Model/model.joblib')
 cv = joblib.load('Model/vectorizer.joblib')
