@@ -18,6 +18,12 @@ cv = CountVectorizer()
 ps = PorterStemmer()
 stop_words = set(stopwords.words('english'))
 
+#defining a function to randomly take out a sample from HateSpeechDataset.csv
+def sampling(df, n):
+    random_sample = df.groupby("Label").sample(n, random_state = 0)
+    random_sample.to_csv("Datasets/random_sample.csv", index = False)
+
+
 def preprocessing(df):
     """
     This function takes df along with the column name as an input and provided
