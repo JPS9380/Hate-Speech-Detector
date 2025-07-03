@@ -12,9 +12,12 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 
 
-cv = CountVectorizer()
 
 #data preprocessing
+cv = CountVectorizer()
+ps = PorterStemmer()
+stop_words = set(stopwords.words('english'))
+
 def preprocessing(df):
     """
     This function takes df along with the column name as an input and provided
@@ -23,10 +26,8 @@ def preprocessing(df):
     corpus = []
     for i in range(0, len(df)):
         review = re.sub('[^a-zA-Z]', ' ', df[i])
-        review = review.lower()
-        review = review.split()
-        ps = PorterStemmer()
-        review = [ps.stem(word) for word in review if word not in set(stopwords.words('english'))]
+        review = review.lower().split()
+        review = [ps.stem(word) for word in review if word not in stop_words]
         review = ' '.join(review)
         corpus.append(review)
     return corpus
