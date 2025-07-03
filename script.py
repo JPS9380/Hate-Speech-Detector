@@ -6,14 +6,15 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 #data preprocessing
-cv = CountVectorizer()
+
+tfv = TfidfVectorizer()
 ps = PorterStemmer()
 stop_words = set(stopwords.words('english'))
 
@@ -39,14 +40,14 @@ def preprocessing(df):
 
 
 #implementing the countvectorizer
+
 def vectorizer(corpus, df):
     """
-    This function takes three inputs and provided the final x and y values after applying the 
-    vectorizer.
-    df takes the dataframe along with the specified column name.
+    This function takes the preprocessed corpus and the dataframe column (labels),
+    applies the TfidfVectorizer, and returns the feature matrix x and target vector y.
     """
-    global cv
-    x = cv.fit_transform(corpus).toarray()
+    global tfv
+    x = tfv.fit_transform(corpus).toarray()
     y = df.values
     return x, y
 
@@ -83,6 +84,6 @@ def clean_input(input):
     review = [ps.stem(word) for word in review if word not in set(stopwords.words('english'))]
     review = ' '.join(review)
     corpus.append(review)
-    x = cv.transform(corpus).toarray()
+    x = tfv.transform(corpus).toarray()
     return x
 
