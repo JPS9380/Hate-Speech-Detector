@@ -60,8 +60,18 @@ cd Hate-Speech-Detector
 ```bash
 jupyter notebook
 ```
-3. Open "notebook.ipynb" and run all cells to train the model and test predictions.
+3. Open "notebook.ipynb", create a new cell at the end and run the following snippet,
+```bash
+from script import *
+import joblib
+model = joblib.load('Model/model.joblib')
+token_izer_ = joblib.load('Model/tokenizer.joblib')
+inp = clean_input("_") #Enter your sentence in place of the underscore.
 
+model.predict(inp)
+```
+
+---
 ### Note: 
 - Make sure to download stopwords from the nltk module for the english language.
 - In the script.py file, make sure to replace the 'text_column' and 'label_column' with actual column names from your csv.
