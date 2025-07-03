@@ -10,13 +10,16 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.ensemble import RandomForestClassifier
-
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, LSTM, Dense
 
 
 #data preprocessing
-cv = CountVectorizer()
-ps = PorterStemmer()
-stop_words = set(stopwords.words('english'))
+vocab_size =14000
+max_len = 100
+tokenizer = Tokenizer(num_words=vocab_size, oov_token="<OOV>")
 
 #defining a function to randomly take out a sample from HateSpeechDataset.csv
 def sampling(df, n):
@@ -24,36 +27,26 @@ def sampling(df, n):
     random_sample.to_csv("Datasets/random_sample.csv", index = False)
 
 
-def preprocessing(df):
+def preprocessing(ser):
     """
     This function takes df along with the column name as an input and provided
     the corpus after preprocessing.
     """
-    corpus = []
-    for i in range(0, len(df)):
-        review = re.sub('[^a-zA-Z]', ' ', df[i])
-        review = review.lower().split()
-        review = [ps.stem(word) for word in review if word not in stop_words]
-        review = ' '.join(review)
-        corpus.append(review)
-    return corpus
+    lst = ser.tolist()
 
+    # Fit the tokenizer and set as global
+    global tokenizer
+    tokenizer.fit_on_texts(lst)
 
-#implementing the countvectorizer
-def vectorizer(corpus, df):
-    """
-    This function takes three inputs and provided the final x and y values after applying the 
-    vectorizer.
-    df takes the dataframe along with the specified column name.
-    """
-    global cv
-    x = cv.fit_transform(corpus).toarray()
-    y = df.values
-    return x, y
+    # Convert texts to sequences
+    sequences = tokenizer.texts_to_sequences(lst)
 
+    # Pad sequences
+    padded_sequences = pad_sequences(sequences, maxlen=max_len, padding='post', truncating='post')
+
+    return padded_sequences
 
 #splitting the test and training data
-
 def split(x, y):
     """
     This function takes the x and y vectors after preprocessing and 
@@ -73,17 +66,14 @@ def evaluation(y_test, y_pred):
 #preprocessing single input
 def clean_input(input):
     """
-    This function takes a single output 
-    and preprocesses it to be suitable for prediction.
+    This function takes a single input string and preprocesses it using the same
+    tokenizer and padding as the main preprocessing function, so it can be used for prediction.
     """
-    corpus = []
-    review = re.sub('[^a-zA-Z]', ' ', input)
-    review = review.lower()
-    review = review.split()
-    ps = PorterStemmer()
-    review = [ps.stem(word) for word in review if word not in set(stopwords.words('english'))]
-    review = ' '.join(review)
-    corpus.append(review)
-    x = cv.transform(corpus).toarray()
-    return x
+    if 'tokenizer' not in globals():
+        raise ValueError("Tokenizer has not been fit yet. Please fit the tokenizer on your dataset first.")
+    # Tokenize and pad the input
+    seq = tokenizer.texts_to_sequences([input])
+    padded = pad_sequences(seq, maxlen=max_len, padding='post', truncating='post')
+    return padded
+
 
