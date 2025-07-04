@@ -8,7 +8,6 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
@@ -17,6 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 tfv = TfidfVectorizer()
 ps = PorterStemmer()
 stop_words = set(stopwords.words('english'))
+stop_words.remove("not")
 
 #defining a function to randomly take out a sample from HateSpeechDataset.csv
 def sampling(df, n):
