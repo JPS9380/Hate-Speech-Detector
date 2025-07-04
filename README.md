@@ -63,11 +63,10 @@ jupyter notebook
 3. Open "notebook.ipynb", create a new cell at the end and run the following snippet,
 ```bash
 from script import *
-from script import tfv
 import joblib
 model = joblib.load('Model/model.joblib')
 tfv = joblib.load('Model/vectorizer.joblib')
-inp = clean_input("_") #Enter your sentence in place of the underscore.
+inp = clean_input("_", vectorizer=tfv) #Enter your sentence in place of the underscore.
 
 print(f"There is a {round(model.predict_proba(inp)[0, 1]*100, 2)}% chance that this sentence contains hate-speech.")
 ```
