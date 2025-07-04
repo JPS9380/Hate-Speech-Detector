@@ -71,7 +71,7 @@ def evaluation(y_test, y_pred):
     return result
 
 #preprocessing single input
-def clean_input(input):
+def clean_input(input, vectorizer):
     """
     This function takes a single output 
     and preprocesses it to be suitable for prediction.
@@ -84,6 +84,6 @@ def clean_input(input):
     review = [ps.stem(word) for word in review if word not in set(stopwords.words('english'))]
     review = ' '.join(review)
     corpus.append(review)
-    x = tfv.transform(corpus).toarray()
+    x = vectorizer.transform(corpus).toarray()
     return x
 
