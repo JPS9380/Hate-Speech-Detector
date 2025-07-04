@@ -7,9 +7,9 @@
 This project provides a machine learning-based solution to detect and quantify hate speech in textual data using Natural Language Processing (NLP) techniques and a Random Forest classification model.
 
 The system allows preprocessing of text data, transformation using a Bag-of-Words model, training on labeled datasets, and evaluating performance. Additionally, the model can take new textual input and estimate the likelihood of hate speech content after performing the necessary preprocessing steps.
-This is a very basic version since the model has been trained only on a subset of the entire data contained in the HateSpeechDataset.csv file. 
+This is an upgraded version from the last one but still is limited to only very less data which is synthetically generated. 
 And, future improvisations are underway, which are,
-- Training the model on complete dataset for improved accuracy
+- Training the model on more real-world labeled dataset for improved accuracy
 - Exploring more advanced NLP techniques
 - Investigating other ML models
 
@@ -33,8 +33,7 @@ The primary goal of this project is to:
 ---
 ## Dataset
 
-This project utilizes two datasets:
-- `HateSpeechDataset.csv`: A labeled dataset with text and corresponding hate speech annotations.
+This project utilizes only one dataset:
 - `synthetic_hate_speech_dataset.csv`: A synthetic extension generated for enhanced training.
 
 Each row contains a textual paragraph with its respective label indicating hate speech presence.
