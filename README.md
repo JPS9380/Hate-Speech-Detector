@@ -66,10 +66,10 @@ from script import *
 from script import tfv
 import joblib
 model = joblib.load('Model/model.joblib')
-cv = joblib.load('Model/vectorizer.joblib')
+tfv = joblib.load('Model/vectorizer.joblib')
 inp = clean_input("_") #Enter your sentence in place of the underscore.
 
-model.predict(inp)
+print(f"There is a {round(model.predict_proba(inp)[0, 1]*100, 2)}% chance that this sentence contains hate-speech.")
 ```
 
 ---
